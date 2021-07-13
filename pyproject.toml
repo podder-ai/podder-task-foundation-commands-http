@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "podder-task-foundation-commands-http"
+version = "0.1.0"
+description = ""
+authors = ["Takaaki Mizuno <takaaki.mizuno@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+fastapi = "^0.64.0"
+uvicorn = "^0.14.0"
+python-multipart = "^0.0.5"
+aiofiles = "^0.7.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+isort = "^5.8.0"
+yapf = "^0.31.0"
+podder-task-foundation = {path = "../podder-task-foundation"}
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.plugins]
+[tool.poetry.plugins."podder_task_foundation.commands"]
+"podder-task-foundation-commands-http" = "podder_task_foundation_commands_http:get_class"
