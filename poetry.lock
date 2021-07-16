@@ -66,7 +66,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 name = "colorlog"
 version = "4.8.0"
 description = "Log formatting with colors!"
-category = "dev"
+category = "main"
 optional = false
 python-versions = "*"
 
@@ -173,10 +173,9 @@ dev = ["pre-commit", "tox"]
 name = "podder-task-foundation"
 version = "0.2.2"
 description = ""
-category = "dev"
+category = "main"
 optional = false
 python-versions = "^3.6"
-develop = false
 
 [package.dependencies]
 colorlog = "^4.2.1"
@@ -187,8 +186,10 @@ toml = "^0.10.1"
 ulid-py = "^1.1.0"
 
 [package.source]
-type = "directory"
-url = "../podder-task-foundation"
+type = "git"
+url = "https://github.com/podder-ai/podder-task-foundation.git"
+reference = "0.2.2"
+resolved_reference = "01e30e426d4eecd51a98a03ecee00bb629bd20bd"
 
 [[package]]
 name = "py"
@@ -249,7 +250,7 @@ testing = ["argcomplete", "hypothesis (>=3.56)", "mock", "nose", "requests", "xm
 name = "python-dotenv"
 version = "0.15.0"
 description = "Add .env support to your django/flask apps in development and deployments"
-category = "dev"
+category = "main"
 optional = false
 python-versions = "*"
 
@@ -271,7 +272,7 @@ six = ">=1.4.0"
 name = "pyyaml"
 version = "5.4.1"
 description = "YAML parser and emitter for Python"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, !=3.5.*"
 
@@ -298,7 +299,7 @@ full = ["aiofiles", "graphene", "itsdangerous", "jinja2", "python-multipart", "p
 name = "toml"
 version = "0.10.2"
 description = "Python Library for Tom's Obvious, Minimal Language"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
 
@@ -314,7 +315,7 @@ python-versions = "*"
 name = "ulid-py"
 version = "1.1.0"
 description = "Universally Unique Lexicographically Sortable Identifier"
-category = "dev"
+category = "main"
 optional = false
 python-versions = "*"
 
@@ -366,7 +367,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=1.2.3)", "pytest-flake8", "pyt
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6"
-content-hash = "2dc03649b12b2691785d0e4a378f649f32469446512ddcf8be5ea274f1848d0b"
+content-hash = "630faad1b9270732b1ada94092597d734ce5eb67f46db5a0e0ad8fbab505140a"
 
 [metadata.files]
 aiofiles = [
