@@ -1,7 +1,8 @@
-from typing import List, Optional
+from typing import Optional
 
 import uvicorn
 from fastapi import APIRouter, FastAPI, Request
+from fastapi.logger import logger
 from fastapi.middleware.cors import CORSMiddleware
 from podder_task_foundation.commands.command import Command
 from podder_task_foundation.context import Context
@@ -17,6 +18,7 @@ class Http(Command):
 
     def __init__(self):
         self._context = None
+        self._mode = "http"
 
     def set_arguments(self, parser):
         parser.add_argument('-v',
@@ -50,9 +52,10 @@ class Http(Command):
             help='Input files (you can pass file[s] or directory)')
 
     def handler(self, arguments):
-        self._context = Context(mode=self.mode,
+        self._context = Context(mode=self._mode,
                                 config_path=arguments.config,
                                 verbose=arguments.verbose,
+                                logger=logger,
                                 debug_mode=arguments.debug)
 
         application = self._create_app(self._context)
