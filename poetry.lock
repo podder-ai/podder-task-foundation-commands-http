@@ -171,8 +171,8 @@ dev = ["pre-commit", "tox"]
 
 [[package]]
 name = "podder-task-foundation"
-version = "0.2.2"
-description = ""
+version = "0.2.3"
+description = "a framework for developing ML/AL models"
 category = "dev"
 optional = false
 python-versions = "^3.6"
@@ -188,8 +188,8 @@ ulid-py = "^1.1.0"
 [package.source]
 type = "git"
 url = "https://github.com/podder-ai/podder-task-foundation.git"
-reference = "0.2.2"
-resolved_reference = "01e30e426d4eecd51a98a03ecee00bb629bd20bd"
+reference = "0.2.3"
+resolved_reference = "fa6ef07a99bfce7ab7bf63ff3210b1d89d27dfa4"
 
 [[package]]
 name = "py"
@@ -367,7 +367,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=1.2.3)", "pytest-flake8", "pyt
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6"
-content-hash = "c921a2fdd7079a5c547b5c0668a4bacc17a5f6322df48ff27d11a4f99634e9fa"
+content-hash = "adda389c0fa6e5f454eaa7ed088c73a0899a6344c2d38bbd5f7c032b05fb0417"
 
 [metadata.files]
 aiofiles = [

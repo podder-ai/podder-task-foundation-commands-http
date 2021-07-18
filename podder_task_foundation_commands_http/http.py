@@ -43,13 +43,12 @@ class Http(Command):
                             default=5000,
                             type=int,
                             help='Port number')
-        parser.add_argument(
-            '-c',
-            '--config',
-            nargs='?',
-            default="",
-            type=str,
-            help='Input files (you can pass file[s] or directory)')
+        parser.add_argument('-c',
+                            '--config',
+                            nargs='?',
+                            default="",
+                            type=str,
+                            help='Config file path')
 
     def handler(self, arguments):
         self._context = Context(mode=self._mode,
