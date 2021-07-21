@@ -51,7 +51,8 @@ class ProcessHandler(object):
                         file_name = file_name + extension
                     copied_path = context.file.temporary_directory.get(
                         file_name)
-                    shutil.copy(original_path, copied_path)
+                    with copied_path.open("wb") as destination:
+                        shutil.copyfileobj(file.file, destination)
                     _input.add_file(file=copied_path, name=name)
 
         return _input
