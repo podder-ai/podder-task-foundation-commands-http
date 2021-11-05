@@ -1,11 +1,13 @@
 from typing import Optional
 
+from argparse import Namespace
 import uvicorn
 from fastapi import APIRouter, FastAPI, Request
 from fastapi.logger import logger
 from fastapi.middleware.cors import CORSMiddleware
 from podder_task_foundation.commands.command import Command
 from podder_task_foundation.context import Context
+from podder_task_foundation.parameters import  Parameters
 
 from .handlers import ProcessesHandler, ProcessHandler
 from .responses import Processes
@@ -50,7 +52,7 @@ class Http(Command):
                             type=str,
                             help='Config file path')
 
-    def handler(self, arguments):
+    def handler(self, arguments: Namespace, unknown_arguments: Parameters, *args):
         self._context = Context(mode=self._mode,
                                 config_path=arguments.config,
                                 verbose=arguments.verbose,

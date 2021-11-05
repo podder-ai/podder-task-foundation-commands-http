@@ -1,11 +1,11 @@
 [tool.poetry]
 name = "podder-task-foundation-commands-http"
-version = "0.0.3"
+version = "0.1.0"
 description = ""
 authors = ["Takaaki Mizuno <takaaki.mizuno@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.6"
+python = "^3.6.2"
 fastapi = "^0.64.0"
 uvicorn = "^0.14.0"
 python-multipart = "^0.0.5"
@@ -15,7 +15,7 @@ aiofiles = "^0.7.0"
 pytest = "^5.2"
 isort = "^5.8.0"
 yapf = "^0.31.0"
-podder-task-foundation = {git = "https://github.com/podder-ai/podder-task-foundation.git", rev = "0.2.3"}
+podder-task-foundation = {git = "https://github.com/podder-ai/podder-task-foundation.git", rev = "0.2.6"}
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
