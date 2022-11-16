@@ -1,13 +1,16 @@
+from argparse import Namespace
+from pathlib import Path
 from typing import Optional
 
-from argparse import Namespace
 import uvicorn
-from fastapi import APIRouter, FastAPI, Request
+from fastapi import APIRouter, FastAPI, HTTPException, Request
 from fastapi.logger import logger
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
 from podder_task_foundation.commands.command import Command
 from podder_task_foundation.context import Context
-from podder_task_foundation.parameters import  Parameters
+from podder_task_foundation.parameters import Parameters
 
 from .handlers import ProcessesHandler, ProcessHandler
 from .responses import Processes
@@ -52,7 +55,8 @@ class Http(Command):
                             type=str,
                             help='Config file path')
 
-    def handler(self, arguments: Namespace, unknown_arguments: Parameters, *args):
+    def handler(self, arguments: Namespace, unknown_arguments: Parameters,
+                *args):
         self._context = Context(mode=self._mode,
                                 config_path=arguments.config,
                                 verbose=arguments.verbose,
@@ -68,6 +72,17 @@ class Http(Command):
             allow_headers=["*"],
         )
         routers = self._routers()
+        application.mount(
+            "/static",
+            StaticFiles(
+                directory=str(Path(__file__).parent.joinpath("static"))),
+            name="static")
+
+        @application.get("/", response_class=HTMLResponse)
+        async def index():
+            template_directory = Path(__file__).parent.joinpath("templates")
+            return template_directory.joinpath("index.html").read_text("utf-8")
+
         application.include_router(routers, prefix="/api")
         log_level = "info"
         if arguments.debug:
@@ -94,6 +109,26 @@ class Http(Command):
 
     def _routers(self) -> APIRouter:
         router = APIRouter()
+
+        @router.post(
+            "/entrypoint",
+            response_model=Processes,
+            name="processes:exec-entry-point",
+        )
+        async def post_entrypoint(request: Request):
+            output_name = request.query_params.get("output_name")
+            process_name = self._context.config.get(
+                "plugins.commands.http.entrypoint.process")
+            if process_name is None:
+                raise HTTPException(status_code=400,
+                                    detail="No entrypoint defined")
+
+            context = self._create_context(None)
+            form = await request.form()
+            return ProcessHandler().handle(context=context,
+                                           name=process_name,
+                                           files=form,
+                                           output_name=output_name)
 
         @router.get(
             "/processes",
