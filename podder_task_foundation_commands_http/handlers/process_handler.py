@@ -6,9 +6,9 @@ from typing import Optional
 from fastapi import HTTPException, Response
 from fastapi.responses import StreamingResponse
 from podder_task_foundation.context import Context
+from podder_task_foundation.objects import Text
 from podder_task_foundation.objects.object import Object
 from podder_task_foundation.payload import Payload
-from podder_task_foundation.objects import factory_from_object
 from podder_task_foundation.process_executor import ProcessExecutor
 from starlette.datastructures import FormData, UploadFile
 
@@ -39,10 +39,8 @@ class ProcessHandler(object):
                                      files: FormData) -> Payload:
         _input = Payload()
         for name, data in files.items():
-            if isinstance(data, UploadFile):
-                data = [data]
             if not isinstance(data, list):
-                continue
+                data = [data]
             for file in data:
                 if isinstance(file, UploadFile):
                     extension = mimetypes.guess_extension(file.content_type)
@@ -56,7 +54,7 @@ class ProcessHandler(object):
                         shutil.copyfileobj(file.file, destination)
                     _input.add_file(file=copied_path, name=name)
                 else:
-                    _object = factory_from_object(file)
+                    _object = Text(data=file, name=name)
                     _input.add(_object, name=name)
 
         return _input
