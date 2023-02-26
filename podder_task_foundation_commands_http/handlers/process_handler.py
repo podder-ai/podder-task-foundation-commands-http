@@ -8,6 +8,7 @@ from fastapi.responses import StreamingResponse
 from podder_task_foundation.context import Context
 from podder_task_foundation.objects.object import Object
 from podder_task_foundation.payload import Payload
+from podder_task_foundation.objects import factory_from_object
 from podder_task_foundation.process_executor import ProcessExecutor
 from starlette.datastructures import FormData, UploadFile
 
@@ -54,6 +55,9 @@ class ProcessHandler(object):
                     with copied_path.open("wb") as destination:
                         shutil.copyfileobj(file.file, destination)
                     _input.add_file(file=copied_path, name=name)
+                else:
+                    _object = factory_from_object(file)
+                    _input.add(_object, name=name)
 
         return _input
 
