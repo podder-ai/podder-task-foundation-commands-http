@@ -110,7 +110,7 @@ class Http(Command):
     def _routers(self) -> APIRouter:
         router = APIRouter()
 
-        @router.post(
+        @router.get(
             "/config",
             response_model=Config,
             name="get-config",
