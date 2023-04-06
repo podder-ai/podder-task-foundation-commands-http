@@ -12,8 +12,8 @@ from podder_task_foundation.commands.command import Command
 from podder_task_foundation.context import Context
 from podder_task_foundation.parameters import Parameters
 
-from .handlers import ProcessesHandler, ProcessHandler
-from .responses import Processes
+from .handlers import ProcessesHandler, ProcessHandler, ConfigHandler
+from .responses import Processes, Config
 
 
 class Http(Command):
@@ -109,6 +109,15 @@ class Http(Command):
 
     def _routers(self) -> APIRouter:
         router = APIRouter()
+
+        @router.post(
+            "/config",
+            response_model=Config,
+            name="get-config",
+        )
+        async def get_config() -> Config:
+            context = self._create_context(None)
+            return ConfigHandler().handle(context)
 
         @router.post(
             "/entrypoint",
