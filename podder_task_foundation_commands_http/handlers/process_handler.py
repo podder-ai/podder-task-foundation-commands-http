@@ -14,13 +14,13 @@ from starlette.datastructures import FormData, UploadFile
 
 
 class ProcessHandler(object):
-    def handle(self, context: Context, name: str, files: FormData,
+    def handle(self, context: Context, name: str, _input: FormData,
                output_name: Optional[str]) -> Response:
         processes = context.processes
         if name not in processes:
             raise HTTPException(status_code=404,
                                 detail="Process {} not found".format(name))
-        _input = self._create_payload_from_request(context, files)
+        _input = self._create_payload_from_request(context, _input)
         process_executor = ProcessExecutor(mode=context.mode,
                                            config_path=str(
                                                context.config.path.absolute()),

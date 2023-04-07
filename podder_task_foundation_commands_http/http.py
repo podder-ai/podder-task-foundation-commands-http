@@ -136,7 +136,7 @@ class Http(Command):
             form = await request.form()
             return ProcessHandler().handle(context=context,
                                            name=process_name,
-                                           files=form,
+                                           _input=form,
                                            output_name=output_name)
 
         @router.get(
@@ -159,7 +159,7 @@ class Http(Command):
             form = await request.form()
             return ProcessHandler().handle(context=context,
                                            name=process_name,
-                                           files=form,
+                                           _input=form,
                                            output_name=output_name)
 
         return router

@@ -1,0 +1,22 @@
+{
+    "title": "",
+    "description": "",
+    "copyright": "© Nexus FrontierTech, Inc. All rights reserved.",
+    "interface": {
+        "input": [
+            {
+                "name": "input",
+                "type": "file",
+                "contentTypes": [
+                  "application/pdf"
+                ]
+            }
+        ],
+        "output": [
+            {
+                "name": "output",
+                "type": "json"
+            }
+        ]
+    }
+}
