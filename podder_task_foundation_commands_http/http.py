@@ -11,6 +11,7 @@ from fastapi.staticfiles import StaticFiles
 from podder_task_foundation.commands.command import Command
 from podder_task_foundation.context import Context
 from podder_task_foundation.parameters import Parameters
+from podder_task_foundation import bootstrap
 
 from .handlers import ProcessesHandler, ProcessHandler, ConfigHandler
 from .responses import Processes, Config
@@ -62,7 +63,7 @@ class Http(Command):
                                 verbose=arguments.verbose,
                                 logger=logger,
                                 debug_mode=arguments.debug)
-
+        bootstrap(self._context)
         application = self._create_app(self._context)
         application.add_middleware(
             CORSMiddleware,
