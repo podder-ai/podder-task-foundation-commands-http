@@ -8,13 +8,13 @@ from fastapi.logger import logger
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
+from podder_task_foundation import bootstrap
 from podder_task_foundation.commands.command import Command
 from podder_task_foundation.context import Context
 from podder_task_foundation.parameters import Parameters
-from podder_task_foundation import bootstrap
 
-from .handlers import ProcessesHandler, ProcessHandler, ConfigHandler
-from .responses import Processes, Config
+from .handlers import ConfigHandler, ProcessesHandler, ProcessHandler
+from .responses import Config, Processes
 
 
 class Http(Command):
@@ -52,7 +52,7 @@ class Http(Command):
         parser.add_argument('-w',
                             '--workers',
                             nargs='?',
-                            default=4,
+                            default=0,
                             type=int,
                             help='Number of workers')
         parser.add_argument('-c',
