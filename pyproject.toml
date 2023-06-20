@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "podder-task-foundation-commands-http"
-version = "0.2.16"
+version = "0.2.17"
 description = "HTTP API interface for podder-task-foundation"
 authors = ["Takaaki Mizuno <takaaki.mizuno@gmail.com>"]
 

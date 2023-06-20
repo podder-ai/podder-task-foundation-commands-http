@@ -6,7 +6,7 @@ import uvicorn
 from fastapi import APIRouter, FastAPI, HTTPException, Request
 from fastapi.logger import logger
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from podder_task_foundation import bootstrap
 from podder_task_foundation.commands.command import Command
@@ -92,7 +92,7 @@ class Http(Command):
 
         @application.get("/healthz", response_class=HTMLResponse)
         async def index():
-            return {"status": True}
+            return JSONResponse(content={"status": True})
 
         application.include_router(routers, prefix="/api")
         log_level = "info"
