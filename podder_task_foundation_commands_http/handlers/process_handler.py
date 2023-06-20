@@ -14,6 +14,7 @@ from starlette.datastructures import FormData, UploadFile
 
 
 class ProcessHandler(object):
+
     def handle(self, context: Context, name: str, _input: FormData,
                output_name: Optional[str]) -> Response:
         processes = context.processes

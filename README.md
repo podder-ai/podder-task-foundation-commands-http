@@ -16,6 +16,10 @@ With this plugin, you can make your process as an HTTP API only with one command
 
 ### Available APIs
 
+### Health Check
+
+GET http://localhost:5000/healthz
+
 #### Get all available process names
 
 GET http://localhost:5000/api/processes

@@ -49,6 +49,12 @@ class Http(Command):
                             default=5000,
                             type=int,
                             help='Port number')
+        parser.add_argument('-w',
+                            '--workers',
+                            nargs='?',
+                            default=4,
+                            type=int,
+                            help='Number of workers')
         parser.add_argument('-c',
                             '--config',
                             nargs='?',
@@ -84,13 +90,19 @@ class Http(Command):
             template_directory = Path(__file__).parent.joinpath("templates")
             return template_directory.joinpath("index.html").read_text("utf-8")
 
+        @application.get("/healthz", response_class=HTMLResponse)
+        async def index():
+            return {"status": True}
+
         application.include_router(routers, prefix="/api")
         log_level = "info"
         if arguments.debug:
             log_level = "debug"
+        workers = arguments.workers if arguments.workers > 0 else None
         uvicorn.run(application,
                     host=arguments.host,
                     port=arguments.port,
+                    workers=workers,
                     log_level=log_level)
 
     @staticmethod

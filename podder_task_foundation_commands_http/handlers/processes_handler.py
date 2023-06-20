@@ -4,6 +4,7 @@ from ..responses import Process, Processes
 
 
 class ProcessesHandler(object):
+
     @staticmethod
     def handle(context: Context) -> Processes:
         processes = context.processes
